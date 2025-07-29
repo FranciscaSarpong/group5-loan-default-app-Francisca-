@@ -229,7 +229,7 @@ if uploaded_file is not None:
     st.success("✅ Dataset successfully loaded!")
 else:
     st.warning("⚠ Please upload a dataset to continue.")
-    return #
+    return#
 
         # A Quick look
     st.subheader("Raw Data Preview")
