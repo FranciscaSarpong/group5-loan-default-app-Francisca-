@@ -19,13 +19,13 @@ from PIL import Image
 from streamlit import logo
 
 # Load uploaded data once and store in session
-def load_uploaded_data():
-    uploaded_file = st.sidebar.file_uploader("📂 Upload your Loan Default CSV file", type="csv")
-    if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
-        st.session_state["df"] = df
-        return df
-    return None
+#def load_uploaded_data():
+ #   uploaded_file = st.sidebar.file_uploader("📂 Upload your Loan Default CSV file", type="csv")
+  #  if uploaded_file is not None:
+   #     df = pd.read_csv(uploaded_file)
+    #    st.session_state["df"] = df
+     #   return df
+    #return None
 
 # Load once at app start (optional)
 if "df" not in st.session_state:
