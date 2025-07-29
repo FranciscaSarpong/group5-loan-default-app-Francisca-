@@ -224,18 +224,12 @@ def Data_Import_and_Overview_page():
     # Functionality to Upload CSV file
     uploaded_file = st.file_uploader("Upload your loan default dataset (.csv)", type="csv")
 
-    # Read and preview the data
-    if uploaded_file is not None:
-        DataUpload = pd.read_csv(uploaded_file)
-        st.success("✅ Dataset successfully loaded!")
-
-    #  Loading the CSV file
-    try:
-        df = pd.read_csv("loan_Default.csv")
-        st.success("Loaded loan_default.csv from local disk")
-    except FileNotFoundError:
-        st.error("Cannot find loan_default.csv in working directory.")
-        return df
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.success("✅ Dataset successfully loaded!")
+else:
+    st.warning("⚠ Please upload a dataset to continue.")
+    return
 
         # A Quick look
     st.subheader("Raw Data Preview")
