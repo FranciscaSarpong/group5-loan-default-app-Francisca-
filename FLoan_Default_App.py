@@ -20,7 +20,7 @@ from streamlit import logo
 
 # Load uploaded data once and store in session
 #def load_uploaded_data():
- #   uploaded_file = st.sidebar.file_uploader("📂 Upload your Loan Default CSV file", type="csv")
+ #   uploaded_file = st.sidebar.file_uploader(" Upload your Loan Default CSV file", type="csv")
   #  if uploaded_file is not None:
    #     df = pd.read_csv(uploaded_file)
     #    st.session_state["df"] = df
@@ -986,6 +986,135 @@ def Results_Interpretation_And_Conclusion_page():
     st.write("### Key Feature Effects")
     st.dataframe(pd.DataFrame(coeff_data))
 
+def Project_Report_page():
+    st.title("📄 Final Project Report")
+
+    st.markdown("""
+###  Group 5 – University of Ghana
+
+---
+
+## 1. Introduction
+
+This interactive web application simulates a real-world scenario where a data science team is tasked with building a system to **predict loan default probability** using demographic and financial features. The goal is to apply the **full machine learning pipeline** from preprocessing to deployment using Ridge Regression.
+
+---
+
+## 2. Dataset Overview
+
+- Source: Kaggle Loan Default Dataset  
+- Target variable: `Status` (0 = Paid, 1 = Default)  
+- ~148,671 records, 34 features (categorical & numerical)  
+-  Some columns had missing values and inconsistent formats.
+
+---
+
+## 3. Tools and Libraries
+
+- Python, Streamlit
+- pandas, NumPy
+- scikit-learn (Ridge, feature selection, CV)
+- seaborn, matplotlib
+- GitHub, Streamlit Community Cloud (Deployment)
+
+---
+
+## 4. Machine Learning Pipeline
+
+###  Data Preprocessing
+
+- Handled missing values:
+  - Numeric → Median
+  - Categorical → Mode
+- Cleaned and standardized text (e.g., gender, age, region)
+- Flagged unknown categories (e.g., `gender_unknown_flag`)
+
+###  Encoding
+
+- Applied **One-Hot Encoding** on 21 categorical variables  
+- Saved encoded dataset as `encoded_cleaned_data.csv`
+
+###  Feature Selection
+
+- Used **Sequential Feature Selector** with Ridge Regression  
+- Selected top **15 most predictive features**
+
+###  Model Training
+
+- Used **Ridge Regression (L2)** to reduce multicollinearity
+- Split: 80% train / 20% test
+- `alpha=1.0` regularization parameter
+
+###  Model Evaluation
+
+- **RMSE** ≈ `0.33`  
+- **R² Score** ≈ `0.41`  
+- Used **5-fold Cross-Validation**  
+- Visualized *Predicted vs Actual*
+
+---
+
+## 5. Interactive Prediction
+
+- User inputs 15 selected feature values via Streamlit UI  
+- Ridge model predicts **default probability**  
+- Classification based on threshold (0.5):  
+  - ≥ 0.5 → “Will Default”  
+  - < 0.5 → “Will Not Default”
+
+---
+
+## 6. Model Insights
+
+| Feature                              | Coefficient | Effect              |
+|--------------------------------------|-------------|---------------------|
+| `credit_type_EQUI`                   | +0.80       | ↑ Default Risk      |
+| `submission_of_application_to_inst` | +0.12       | ↑ Default Risk      |
+| `loan_type_type2`                    | +0.09       | ↑ Default Risk      |
+| `lump_sum_payment_not_lpsm`         | -0.35       | ↓ Default Risk      |
+| `interest_rate_spread`              | -0.10       | ↓ Default Risk      |
+
+---
+
+## 7. Limitation
+
+- `Status` is binary (0/1), but Ridge is a regression model.
+- Ridge estimates probabilities, not class labels.
+- Would benefit from **Logistic Regression or Random Forest** in future.
+
+---
+
+## 8. Deployment
+
+- App hosted on Streamlit Community Cloud  
+- GitHub Repository: [Group 5 Loan Default App](https://kftalde5ypwd5a3qqejuvo.streamlit.app)  
+- File upload handled using `st.file_uploader()`  
+  *(CSV not included in GitHub due to size limits)*
+
+---
+
+## 9. Team Members
+
+| Name                    | Student ID | Role                              |
+|-------------------------|------------|-----------------------------------|
+| Kingsley Sarfo          | 22252461   | App Design, Coordinator           |
+| Francisca Manu Sarpong  | 22255796   | Preprocessing, Deployment         |
+| George Owell            | 22256146   | Evaluation, Cross-validation      |
+| Barima Owiredu Addo     | 22254055   | UI & Interactive Prediction       |
+| Akrobettoe Marcus       | 11410687   | Feature Selection, Model Training |
+
+---
+
+## 10. Conclusion
+
+This project demonstrates:
+- Real-world application of machine learning to financial risk.
+- Importance of careful data cleaning, encoding, and feature selection.
+- Interactive ML apps improve interpretability for decision makers.
+
+---
+""")
+
 
 # Map sidebar names to functions
 pages = {
@@ -997,6 +1126,7 @@ pages = {
     "Model Evaluation": Model_Evaluation_page,
     "Interactive Prediction" : Interactive_Prediction_page,
     "Result Interpretation and Conclusion" : Results_Interpretation_And_Conclusion_page,
+    "Project Report" : Project_Report_page,
 }
 
 selection = st.sidebar.selectbox("Select Page", list(pages.keys()))
