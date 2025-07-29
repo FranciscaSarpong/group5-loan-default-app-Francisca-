@@ -28,8 +28,8 @@ from streamlit import logo
     #return None
 
 # Load once at app start (optional)
-if "df" not in st.session_state:
-    load_uploaded_data()
+#if "df" not in st.session_state:
+ #   load_uploaded_data()
 
 
 # Setting up Home page configuration
