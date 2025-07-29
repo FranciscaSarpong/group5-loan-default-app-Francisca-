@@ -141,7 +141,7 @@ def Home_Page():
     ###  Dataset Information:
     - Source: [Kaggle - Loan Default Dataset](https://www.kaggle.com/datasets/yasserh/loan-default-dataset)
     - Target variable: Status (indicating default)
-    - Download the Dataset with this link  (https://drive.google.com/file/d/1NGurIkGeLmFVIjJVu-oUuIvbUUScpiLL/view?usp=sharing)
+   - Due to GitHub’s size limitations, the dataset was hosted on Google Drive.Here is the secure link to access the dataset: (https://drive.google.com/file/d/1NGurIkGeLmFVIjJVu-oUuIvbUUScpiLL/view?usp=sharing)
 
     """)
 
