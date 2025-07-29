@@ -222,16 +222,14 @@ def Data_Import_and_Overview_page():
     st.markdown("This section shows the raw data, summary statistics, and visualizations.")
 
     # Functionality to Upload CSV file
-    uploaded_file = st.file_uploader("Upload your loan default dataset (.csv)", type="csv")
+        if uploaded_file is None:
+        st.warning("⚠ Please upload a dataset to continue.")
+        return  # ✅ safely exits the function here
 
-if uploaded_file is not None:
+        # This only runs if a file is uploaded
     df = pd.read_csv(uploaded_file)
     st.success("✅ Dataset successfully loaded!")
-else:
-    st.warning("⚠ Please upload a dataset to continue.")
-    return#
 
-        # A Quick look
     st.subheader("Raw Data Preview")
     st.dataframe(df.head(10))
 
