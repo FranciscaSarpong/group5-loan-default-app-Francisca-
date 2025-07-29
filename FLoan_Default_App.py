@@ -220,9 +220,8 @@ def Home_Page():
 def Data_Import_and_Overview_page():
     st.title("Data Import & Overview")
     st.markdown("This section shows the raw data, summary statistics, and visualizations.")
-
     # Functionality to Upload CSV file
-        if uploaded_file is None:
+    if uploaded_file is None:
         st.warning("⚠ Please upload a dataset to continue.")
         return  # ✅ safely exits the function here
 
