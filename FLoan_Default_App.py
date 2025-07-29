@@ -18,6 +18,20 @@ from sklearn.metrics import mean_squared_error, r2_score
 from PIL import Image
 from streamlit import logo
 
+# Load uploaded data once and store in session
+def load_uploaded_data():
+    uploaded_file = st.sidebar.file_uploader("📂 Upload your Loan Default CSV file", type="csv")
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        st.session_state["df"] = df
+        return df
+    return None
+
+# Load once at app start (optional)
+if "df" not in st.session_state:
+    load_uploaded_data()
+
+
 # Setting up Home page configuration
 # Set page configuration
 st.set_page_config(
@@ -41,13 +55,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-@st.cache_data
-def load_data():
-    df = pd.read_csv("Loan_Default.csv")
-    return df
-
-df = load_data()
 
 # Function to hold pages
 def Home_Page():
@@ -220,7 +227,10 @@ def Home_Page():
 def Data_Import_and_Overview_page():
     st.title("Data Import & Overview")
     st.markdown("This section shows the raw data, summary statistics, and visualizations.")
+
     # Functionality to Upload CSV file
+    uploaded_file = st.file_uploader("Upload your loan default dataset (.csv)", type="csv")
+
     if uploaded_file is None:
         st.warning("⚠ Please upload a dataset to continue.")
         return  # ✅ safely exits the function here
@@ -365,9 +375,13 @@ def Data_Preprocessing_page():
 
     Let's start by examining the missing values in the dataset.
     """)
+    # Upload CSV
+    uploaded_file = st.file_uploader("Upload your loan default dataset (.csv)", type="csv")
+    if uploaded_file is None:
+        st.warning("⚠ Please upload a dataset to continue.")
+        return
 
-    st.subheader("Missing Values before cleaning Summary")
-    st.dataframe(missing_value_summary(df), use_container_width=True)
+    df = pd.read_csv(uploaded_file)
 
 
     # Define your 21 categorical columns
